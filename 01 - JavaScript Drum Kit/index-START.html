@@ -68,8 +68,6 @@
         key.classList.add('playing');
       }
 
-      window.addEventListener('keydown', playSound);
-
       function removeTransition({ propertyName }) {
         if (propertyName !== 'transform') return null;
 
@@ -81,6 +79,8 @@
       keys.forEach(key =>
         key.addEventListener('transitionend', removeTransition)
       );
+
+      window.addEventListener('keydown', playSound);
     </script>
   </body>
 </html>
