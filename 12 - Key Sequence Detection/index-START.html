@@ -9,6 +9,21 @@
     ></script>
   </head>
   <body>
-    <script></script>
+    <script>
+      const pressed = [];
+      const secretCode = 'munion';
+
+      window.addEventListener('keyup', ({ key }) => {
+        pressed.push(key);
+        pressed.splice(
+          -secretCode.length - 1,
+          pressed.length - secretCode.length
+        );
+
+        if (pressed.join('').includes(secretCode)) {
+          cornify_add();
+        }
+      });
+    </script>
   </body>
 </html>
