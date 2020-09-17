@@ -237,6 +237,28 @@
           if (callNow) func.apply(context, args);
         };
       }
+
+      const images = document.querySelectorAll('.slide-in');
+
+      function checkSlide(e) {
+        images.forEach(image => {
+          const howFarWindowIsScrolled = window.scrollY + window.innerHeight;
+          // INFO: The half way through the image
+          const slideInAt = howFarWindowIsScrolled - image.height / 2;
+          // INFO: The bottom of the image
+          const imageBottom = image.offsetTop + image.height;
+          const isHalfShown = slideInAt > image.offsetTop;
+          const isNotScrolledPast = window.scrollY < imageBottom;
+
+          if (isHalfShown && isNotScrolledPast) {
+            image.classList.add('active');
+          } else {
+            image.classList.remove('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', debounce(checkSlide));
     </script>
 
     <style>
