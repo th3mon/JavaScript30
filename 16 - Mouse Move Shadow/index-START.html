@@ -33,6 +33,36 @@
       }
     </style>
 
-    <script></script>
+    <script>
+      const hero = document.querySelector('.hero');
+      const text = hero.querySelector('h1');
+      const countWalk = (dimension, scalar) => {
+        const walk = 100; // 100px
+
+        return Math.round((dimension / scalar) * walk - walk / 2);
+      };
+
+      function shadow({ target, offsetX: x, offsetY: y }) {
+        const { offsetWidth: width, offsetHeight: height } = hero;
+
+        // INFO: Normalize the x and the y values when target is not the hero
+        if (this !== target) {
+          x = x + target.offsetLeft;
+          y = y + target.offsetTop;
+        }
+
+        const xWalk = countWalk(x, width);
+        const yWalk = countWalk(y, height);
+
+        text.style.textShadow = `
+          ${xWalk}px ${yWalk}px 0 rgba(252, 175, 217, 0.7),
+          ${xWalk * -1}px ${yWalk}px 0 rgba(1, 238, 255, 0.7),
+          ${xWalk}px ${yWalk * -1}px 0 rgba(0, 199, 225, 0.7),
+          ${xWalk * -1}px ${yWalk * -1}px 0 rgba(253, 45, 164, 0.7)
+        `;
+      }
+
+      hero.addEventListener('mousemove', shadow);
+    </script>
   </body>
 </html>
