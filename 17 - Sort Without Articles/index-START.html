@@ -59,6 +59,20 @@
         'Anywhere But Here',
         'An Old Dog',
       ];
+      const ridPronoun = (value, pronoun = /^(a |an |the )/gi) =>
+        value.replace(pronoun, '').trim();
+        
+      const bandsUi = document.getElementById('bands');
+
+      const sortedBands = bands.sort((a, b) =>
+        ridPronoun(a) > ridPronoun(b) ? 1 : -1
+      );
+
+      const bandTemplate = (band, id) =>
+        `<li class"bands__item-${id}">${band}</li>`;
+
+      const html = sortedBands.map(bandTemplate).join('');
+      bandsUi.innerHTML = html;
     </script>
   </body>
 </html>
